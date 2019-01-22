@@ -4,11 +4,12 @@
 # See docs at https://www.packer.io/docs/install/index.html
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/utility:${BUILD_VERSION}',
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/utility:${_BUILD_VERSION}',
         '-t', 'gcr.io/$PROJECT_ID/utility',
         '.']
-  env: ['BUILD_VERSION=1.0']
+substitutions:
+  _BUILD_VERSION: 1.0.0
 
 images:
 - 'gcr.io/$PROJECT_ID/utility:latest'
-- 'gcr.io/$PROJECT_ID/utility:$BUILD_VERSION'
+- 'gcr.io/$PROJECT_ID/utility:$_BUILD_VERSION'
